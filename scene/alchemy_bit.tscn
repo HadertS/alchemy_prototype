@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bshtcl7xwaqo3"]
+
+[ext_resource type="Script" uid="uid://bs8ywn4tenc7j" path="res://scene/alchemy_bit.gd" id="1_cwxto"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_008yh"]
+radius = 1.0
+
+[node name="Alchemy_Bit" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_cwxto")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-1, -1)
+color = Color(1, 0, 1, 1)
+polygon = PackedVector2Array(0, 0, 0, 1.01562, 0, 2, 1.04219, 2, 2, 2, 2, 2, 2, 1.00781, 2, 0, 1, 0)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_008yh")
