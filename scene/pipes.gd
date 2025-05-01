@@ -11,16 +11,18 @@ func _ready():
 
 
 func redraw_pressure_overlay():
-	get_tree().call_group("pressure_overlay", "queue_free") 
+	get_tree().call_group("pressure_overlay", "queue_free")
 	if pressure_view_mode:
 		for cell in get_used_cells():
 			var pressure_label = Label.new()
 			pressure_label.add_to_group("pressure_overlay")
-			pressure_label.size = Vector2(32,32)
-			pressure_label.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
-			pressure_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
-			pressure_label.text = "%s" % get_tile_pressure(cell)			
-			pressure_label.position = map_to_local(cell)-pressure_label.size/2
+			pressure_label.size = Vector2(32, 32)
+			pressure_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+			pressure_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			pressure_label.text = "%s" % get_tile_pressure(cell)
+			pressure_label.position = map_to_local(cell) - pressure_label.size / 2
+			pressure_label.pivot_offset = pressure_label.size / 2
+			pressure_label.scale = Vector2(0.75, 0.75)
 			add_child(pressure_label)
 
 ## Function to change the pressure of a cell
@@ -38,7 +40,7 @@ func get_tile_pressure(cell: Vector2) -> int:
 	if cell in cell_pressure_data:
 		return cell_pressure_data[cell]
 	else:
-		return 0  # Return 0 if the cell pressure is not found
+		return 0 # Return 0 if the cell pressure is not found
 
 ## Function to check if pressure data exists for a cell
 func is_cell_pressure_exist(cell: Vector2) -> bool:
@@ -49,10 +51,10 @@ func _unhandled_input(event):
 		var cell = local_to_map(get_local_mouse_position())
 		if cell:
 			if event.button_index == MOUSE_BUTTON_RIGHT:
-				change_cell_pressure (cell,5)
+				change_cell_pressure(cell, 5)
 
 			elif event.button_index == MOUSE_BUTTON_LEFT:
-				change_cell_pressure (cell,-5)
+				change_cell_pressure(cell, -5)
 
 func _physics_process(delta):
 	pass
