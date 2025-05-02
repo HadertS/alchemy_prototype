@@ -70,7 +70,6 @@ func reassess_target():
 		var global = get_node("../Pipes").to_global(local)
 		set_movement_target(global)
 
-
 func _on_pipes_pressure_changed():
 	reassess_target()
 	
